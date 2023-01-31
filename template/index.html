@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>APP</title>
+</head>
+<body>
+  <h1>APP</h1>
+  <div id="counter"></div>
+  <div id="chart" class="w3-panel w3-card-4"></div>
+  <div id="graph" class="w3-panel w3-card-4"></div>
+
+
+  <script>
+    var eventSource = new EventSource("/listen")
+
+    eventSource.addEventListener("message", function(e) {
+      console.log(e.data)
+    }, false)
+
+    eventSource.addEventListener("online", function(e) {
+      data = JSON.parse(e.data)
+      document.querySelector("#counter").innerText = data.counter
+      document.querySelector("#graph").innerText = data.graph
+      document.querySelector("#chart").innerText = data.chart
+    }, true)
+
+  </script>
+
+</body>
+</html>
